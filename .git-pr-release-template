@@ -1,4 +1,4 @@
 <%= ENV['VERSION'] %>
 <% pull_requests.each do |pr| -%>
-- [ ] <%= pr.title %> - <%= pr.to_checklist_item %>
+<%= pr.title %> - <%= pr.to_checklist_item %>
 <% end -%>
