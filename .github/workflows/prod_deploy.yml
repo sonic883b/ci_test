@@ -2,10 +2,10 @@ name: PROD Deploy using AWS CodeDeploy
 
 on:
   pull_request:
-  types: [closed]
-  branches:
-    - 'release'
-
+    branches:
+      - 'release'  
+    types: [closed]
+    
 jobs:
   create-release:
     runs-on: ubuntu-latest
