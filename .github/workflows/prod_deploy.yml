@@ -58,4 +58,4 @@ jobs:
     
         - name: ECS deploy
           run : |
-            echo "revert ECS deploy"
+            echo "revert ECS deploy01"
