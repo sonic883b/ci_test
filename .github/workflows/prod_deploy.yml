@@ -13,9 +13,12 @@ jobs:
   
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      ### Todo: 余力があれば https://github.com/softprops/action-gh-release に切り替える
+      ### actions/create-release repository が readonly となっている為 https://github.com/actions/create-release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
