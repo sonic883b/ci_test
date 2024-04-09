@@ -58,7 +58,6 @@ jobs:
           echo "IMAGE_BRANCH:$IMAGE_BRANCH"
           echo "IMAGE_TAG:$IMAGE_TAG"
 
-
   revert-deploy:
     name: PRD Deploy (revert)
     runs-on: ubuntu-latest
@@ -84,3 +83,4 @@ jobs:
             echo "IMAGE_REV:$IMAGE_REV"
             echo "IMAGE_BRANCH:$IMAGE_BRANCH"
             echo "IMAGE_TAG:$IMAGE_TAG"
+
