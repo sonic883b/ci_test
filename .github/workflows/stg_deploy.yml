@@ -54,10 +54,13 @@ jobs:
           IMAGE_REV="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "IMAGE_TAG=${IMAGE_BRANCH}_${IMAGE_REV}" >> $GITHUB_ENV
   
+          STG_IMAGE_SHA=${{ github.event.pull_request.head.sha }}
+
           echo "DOCKER_IMAGE:$DOCKER_IMAGE"
           echo "IMAGE_REV:$IMAGE_REV"
           echo "IMAGE_BRANCH:$IMAGE_BRANCH"
           echo "IMAGE_TAG:$IMAGE_TAG"
+          echo "STG_IMAGE_SHA:$STG_IMAGE_SHA"
 
 
 
