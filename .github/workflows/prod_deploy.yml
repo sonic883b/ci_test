@@ -49,10 +49,14 @@ jobs:
           echo "DOCKER_IMAGE=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
       
           ### イメージタグ
+          # stg コンテナのタグを取得する
+          STG_IMAGE_SHA=${{ github.event.pull_request.head.sha }}
           IMAGE_BRANCH="$(git name-rev --name-only HEAD | sed 's/\//_/g' | sed 's/\^/_/g')" >> $GITHUB_ENV
+          PROD_IMAGE=$(cat VERSION)
+          
           IMAGE_REV="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "IMAGE_TAG=${IMAGE_BRANCH}_${IMAGE_REV}" >> $GITHUB_ENV
-      
+          echo "STG_IMAGE_SHA:$STG_IMAGE_SHA"
           echo "DOCKER_IMAGE:$DOCKER_IMAGE"
           echo "IMAGE_REV:$IMAGE_REV"
           echo "IMAGE_BRANCH:$IMAGE_BRANCH"
