@@ -5,6 +5,10 @@ inputs:
     description: 'Notification message'
     required: true
     type: string
+  slack_webhook_url:
+    description: 'Slack Webhook URL'
+    required: true
+    type: string
 runs:
   using: 'composite'
   steps:
@@ -21,4 +25,4 @@ runs:
             "status": "${{ job.status }}"
           }
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
+        SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
