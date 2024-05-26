@@ -70,6 +70,8 @@ jobs:
         uses: ./.github/actions/slack-notify
         with:
           message: "Prod deploy completed"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
+
   
 
   revert-deploy:
@@ -102,3 +104,4 @@ jobs:
           uses: ./.github/actions/slack-notify
           with:
             message: "Revert deploy completed"
+            slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
