@@ -62,8 +62,20 @@ jobs:
           echo "IMAGE_TAG:$IMAGE_TAG"
           echo "STG_IMAGE_SHA:$STG_IMAGE_SHA"
 
-      - name: Notify Slack
+      # 成功時の通知
+      - name: Notify Slack on Success
+        if: success()
         uses: ./.github/actions/slack-notify
         with:
-          message: "Stg deploy completed"
+          message: "Revert deploy completed successfully"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
+          color: "#36a64f"  # 緑色
+
+      # 失敗時の通知
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: ./.github/actions/slack-notify
+        with:
+          message: "Revert deploy failed"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
+          color: "#ff0000"  # 赤色
