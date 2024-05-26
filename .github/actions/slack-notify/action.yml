@@ -10,7 +10,7 @@ inputs:
     required: true
     type: string
   color:
-    description: 'Color of the message block'
+    description: 'Color of the message block in Slack notification'
     required: false
     type: string
     default: '#36a64f'
