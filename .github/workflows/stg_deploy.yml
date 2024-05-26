@@ -66,3 +66,4 @@ jobs:
         uses: ./.github/actions/slack-notify
         with:
           message: "Stg deploy completed"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
