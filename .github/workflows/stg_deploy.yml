@@ -62,16 +62,8 @@ jobs:
           echo "IMAGE_TAG:$IMAGE_TAG"
           echo "STG_IMAGE_SHA:$STG_IMAGE_SHA"
 
-      - name: Send GitHub Action trigger data to Slack workflow
-        id: slack
-        uses: slackapi/slack-github-action@v1.16.0
+      - name: Notify Slack
+        uses: ./.github/actions/slack-notify
         with:
-          payload: |
-            {
-             "foo": "stg deploy completed"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }} 
-
-
-
+          message: "Stg deploy completed"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}

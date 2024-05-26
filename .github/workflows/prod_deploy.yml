@@ -66,17 +66,13 @@ jobs:
           echo "IMAGE_TAG:$IMAGE_TAG"
           echo "PROD_IMAGE:$PROD_IMAGE"
       
-      - name: Send GitHub Action trigger data to Slack workflow
-        id: slack
-        uses: slackapi/slack-github-action@v1.16.0
+      - name: Notify Slack
+        uses: ./.github/actions/slack-notify
         with:
-          payload: |
-            {
-              "foo": "Prod deploy completed"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }} 
+          message: "Prod deploy completed"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
 
+  
 
   revert-deploy:
     name: PRD Deploy (revert)
@@ -104,14 +100,8 @@ jobs:
             echo "IMAGE_BRANCH:$IMAGE_BRANCH"
             echo "IMAGE_TAG:$IMAGE_TAG"
 
-
-        - name: Send GitHub Action trigger data to Slack workflow
-          id: slack
-          uses: slackapi/slack-github-action@v1.16.0
+        - name: Notify Slack
+          uses: ./.github/actions/slack-notify
           with:
-            payload: |
-              {
-               "foo": "revert deploy completed"
-              }
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }} 
+            message: "Revert deploy completed"
+            slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
