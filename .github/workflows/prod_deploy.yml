@@ -39,7 +39,6 @@ jobs:
         with:
           message: "Prod deploy completed successfully"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
-          color: "#36a64f"  # 緑色
 
       # 失敗時の通知
       - name: Notify Slack on Failure
@@ -48,7 +47,6 @@ jobs:
         with:
           message: "Prod deploy failed"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
-          color: "#ff0000"  # 赤色
 
   deploy:
     name: Prod Deploy
@@ -92,7 +90,6 @@ jobs:
         with:
           message: "Prod deploy completed successfully"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
-          color: "#36a64f"  # 緑色
 
       # 失敗時の通知
       - name: Notify Slack on Failure
@@ -101,7 +98,6 @@ jobs:
         with:
           message: "Prod deploy failed"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
-          color: "#ff0000"  # 赤色
 
   revert-deploy:
     name: PRD Deploy (revert)
@@ -137,7 +133,6 @@ jobs:
           with:
             message: "Revert deploy completed successfully"
             slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
-            color: "#36a64f"  # 緑色
 
         # 失敗時の通知
         - name: Notify Slack on Failure
@@ -146,4 +141,3 @@ jobs:
           with:
             message: "Revert deploy failed"
             slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
-            color: "#ff0000"  # 赤色
