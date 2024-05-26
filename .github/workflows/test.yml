@@ -1,9 +1,9 @@
 name: STG deploy from main branch using ecspresso
 
 on:
-  pull_request:
+  push:
     branches:
-      - 'color_test'
+      - color_test
 
 jobs:
   deploy:
