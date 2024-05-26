@@ -10,7 +10,7 @@ inputs:
     required: true
     type: string
   color:
-    description: 'Color of the message block in Slack notification'
+    description: 'Color of the message block'
     required: false
     type: string
     default: '#36a64f'
@@ -27,7 +27,7 @@ runs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": "`${{ inputs.message }}`"
+                  "text": "${{ inputs.message }}"
                 }
               },
               {
@@ -35,11 +35,7 @@ runs:
                 "elements": [
                   {
                     "type": "mrkdwn",
-                    "text": "*Author:* `${{ github.event.sender.login }}`
-                             *Repo:* `${{ github.event.repository.full_name }}`
-                             *Branch:* `${{ github.ref }}`
-                             *Status:* `${{ job.status }}`
-                             *URL:* <${{ github.event.pull_request.html_url || github.event.head_commit.url }}|Link>"
+                    "text": "*Author:* ${{ github.event.sender.login }}\n*Repo:* ${{ github.event.repository.full_name }}\n*Branch:* ${{ github.ref }}\n*Status:* ${{ job.status }}\n*URL:* <${{ github.event.pull_request.html_url || github.event.head_commit.url }}|Link>"
                   }
                 ]
               }
@@ -52,7 +48,7 @@ runs:
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-                      "text": "`${{ inputs.message }}`"
+                      "text": "${{ inputs.message }}"
                     }
                   }
                 ]
