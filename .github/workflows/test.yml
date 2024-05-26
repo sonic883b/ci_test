@@ -1,0 +1,51 @@
+name: STG deploy from main branch using ecspresso
+
+on:
+  pull_request:
+    branches:
+      - 'color_test'
+
+jobs:
+  deploy:
+    name: STG Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: ECS deploy
+        run : |
+          echo ${{ github.sha }}
+          echo "DOCKER_IMAGE=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+  
+          ### イメージタグ
+          IMAGE_BRANCH="$(git name-rev --name-only HEAD | sed 's/\//_/g' | sed 's/\^/_/g')" >> $GITHUB_ENV
+          IMAGE_REV="$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${IMAGE_BRANCH}_${IMAGE_REV}" >> $GITHUB_ENV
+  
+          STG_IMAGE_SHA=${{ github.event.pull_request.head.sha }}
+
+          echo "DOCKER_IMAGE:$DOCKER_IMAGE"
+          echo "IMAGE_REV:$IMAGE_REV"
+          echo "IMAGE_BRANCH:$IMAGE_BRANCH"
+          echo "IMAGE_TAG:$IMAGE_TAG"
+          echo "STG_IMAGE_SHA:$STG_IMAGE_SHA"
+
+      # 成功時の通知
+      - name: Notify Slack on Success
+        if: success()
+        uses: ./.github/actions/slack-notify
+        with:
+          message: "Stg deploy completed successfully"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
+
+      # 失敗時の通知
+      - name: Notify Slack on Failure
+        if: failure()
+        uses: ./.github/actions/slack-notify
+        with:
+          message: "Stg deploy failed"
+          slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
