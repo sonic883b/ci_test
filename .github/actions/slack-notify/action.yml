@@ -22,39 +22,20 @@ runs:
       with:
         payload: |
           {
+            "text": "Deployment started (In Progress)",
             "attachments": [
               {
-                "color": "${{ inputs.color }}",
-                "pretext": "${{ inputs.message }}",
+                "pretext": "Deployment started",
+                "color": "dbab09",
                 "fields": [
                   {
-                    "title": "Author",
-                    "value": "${{ github.event.sender.login }}",
-                    "short": true
-                  },
-                  {
-                    "title": "Repo",
-                    "value": "${{ github.event.repository.full_name }}",
-                    "short": true
-                  },
-                  {
-                    "title": "Branch",
-                    "value": "${{ github.ref }}",
-                    "short": true
-                  },
-                  {
                     "title": "Status",
-                    "value": "${{ job.status }}",
-                    "short": true
-                  },
-                  {
-                    "title": "URL",
-                    "value": "<${{ github.event.pull_request.html_url || github.event.head_commit.url }}|Link>",
-                    "short": false
+                    "short": true,
+                    "value": "In Progress"
                   }
                 ]
               }
             ]
-          }
+          } 
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
