@@ -5,6 +5,11 @@ inputs:
     description: 'Notification message'
     required: true
     type: string
+  color:
+    description: 'Color of the message block'
+    required: false
+    type: string
+    default: '#36a64f'
   slack_webhook_url:
     description: 'Slack Webhook URL'
     required: true
@@ -17,12 +22,39 @@ runs:
       with:
         payload: |
           {
-            "message": "${{ inputs.message }}",
-            "author": "${{ github.event.sender.login }}",
-            "repo_name": "${{ github.event.repository.full_name }}",
-            "url": "${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-            "branch": "${{ github.ref }}",
-            "status": "${{ job.status }}"
+            "attachments": [
+              {
+                "color": "${{ inputs.color }}",
+                "pretext": "${{ inputs.message }}",
+                "fields": [
+                  {
+                    "title": "Author",
+                    "value": "${{ github.event.sender.login }}",
+                    "short": true
+                  },
+                  {
+                    "title": "Repo",
+                    "value": "${{ github.event.repository.full_name }}",
+                    "short": true
+                  },
+                  {
+                    "title": "Branch",
+                    "value": "${{ github.ref }}",
+                    "short": true
+                  },
+                  {
+                    "title": "Status",
+                    "value": "${{ job.status }}",
+                    "short": true
+                  },
+                  {
+                    "title": "URL",
+                    "value": "<${{ github.event.pull_request.html_url || github.event.head_commit.url }}|Link>",
+                    "short": false
+                  }
+                ]
+              }
+            ]
           }
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}

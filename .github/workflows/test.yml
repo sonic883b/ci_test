@@ -1,4 +1,4 @@
-name: STG deploy from main branch using ecspresso
+name: notify-slack color test
 
 on:
   push:
@@ -40,6 +40,7 @@ jobs:
         uses: ./.github/actions/slack-notify
         with:
           message: "Stg deploy completed successfully"
+          color: "#36a64f"  # 緑色
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
 
       # 失敗時の通知
@@ -48,4 +49,5 @@ jobs:
         uses: ./.github/actions/slack-notify
         with:
           message: "Stg deploy failed"
+          color: "#ff0000"  # 赤色
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
