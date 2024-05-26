@@ -9,11 +9,6 @@ inputs:
     description: 'Slack Webhook URL'
     required: true
     type: string
-  color:
-    description: 'Color of the message block'
-    required: false
-    type: string
-    default: '#36a64f'
 runs:
   using: 'composite'
   steps:
@@ -22,38 +17,12 @@ runs:
       with:
         payload: |
           {
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "${{ inputs.message }}"
-                }
-              },
-              {
-                "type": "context",
-                "elements": [
-                  {
-                    "type": "mrkdwn",
-                    "text": "*Author:* ${{ github.event.sender.login }}\n*Repo:* ${{ github.event.repository.full_name }}\n*Branch:* ${{ github.ref }}\n*Status:* ${{ job.status }}\n*URL:* <${{ github.event.pull_request.html_url || github.event.head_commit.url }}|Link>"
-                  }
-                ]
-              }
-            ],
-            "attachments": [
-              {
-                "color": "${{ inputs.color }}",
-                "blocks": [
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "${{ inputs.message }}"
-                    }
-                  }
-                ]
-              }
-            ]
+            "message": "${{ inputs.message }}",
+            "author": "${{ github.event.sender.login }}",
+            "repo_name": "${{ github.event.repository.full_name }}",
+            "url": "${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+            "branch": "${{ github.ref }}",
+            "status": "${{ job.status }}"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
