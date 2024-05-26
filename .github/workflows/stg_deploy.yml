@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - 'main'
+      - 'update05'
     types: [closed]
 
 jobs:
@@ -61,7 +62,7 @@ jobs:
           echo "IMAGE_BRANCH:$IMAGE_BRANCH"
           echo "IMAGE_TAG:$IMAGE_TAG"
           echo "STG_IMAGE_SHA:$STG_IMAGE_SHA"
-          
+
       # 成功時の通知
       - name: Notify Slack on Success
         if: success()
