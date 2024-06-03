@@ -39,7 +39,7 @@ jobs:
         if: success()
         uses: ./.github/actions/slack-notify
         with:
-          message: <@ULM3EMMKM>
+          message: "@Nakanishi Yosuke 中西 陽介"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
 
       # 失敗時の通知
