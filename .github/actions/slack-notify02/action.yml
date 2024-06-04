@@ -15,16 +15,11 @@ runs:
     - name: Send Slack notification
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        payload: |
-          {
-            "text": "<@U24MN0951> 
-            "message": "${{ inputs.message }}",
-            "author": "${{ github.event.sender.login }}",
-            "repo_name": "${{ github.event.repository.full_name }}",
-            "url": "${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-            "branch": "${{ github.ref }}",
-            "status": "${{ job.status }}"
-          }"
+        payload: "{\"text\":\" <@U24MN0951>\\n 以下のプルリクエストを作成しました。\\n 
+          Title     : ${{ github.event.pull_request.title}}\\n 
+          URL       : ${{ github.event.pull_request.html_url}}\\n
+          Assignees : ${{ github.event.pull_request.assignees[0].login}}\\n
+          Revwer    : ${{ github.event.pull_request.requested_reviewers[0].login}}\"}" 
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
         #SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
