@@ -14,19 +14,48 @@ runs:
   steps:
     - name: Send Slack notification
       uses: slackapi/slack-github-action@v1.26.0
+      #with:
+      #  payload: |
+      #    {
+      #      "text": "<@U24MN0951> <@sonic883b> GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+      #      "blocks": [
+      #        {
+      #          "type": "section",
+      #          "text": {
+      #            "type": "mrkdwn",
+      #            "text": "<@U24MN0951> ddd GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+      #          }
+      #        }
+      #      ]
+      #    }
       with:
         payload: |
-          {
-            "text": "<@U24MN0951> <@sonic883b> GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "<@U24MN0951> ddd GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "ビルド成功"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Actions: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}"
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Author: <https://github.com/${{ github.event.sender.login }}|@${{ github.event.sender.login }}>"
+                    }
+                  ]
                 }
-              }
-            ]
-          }
+              ]
+            }
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
