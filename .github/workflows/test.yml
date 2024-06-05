@@ -39,8 +39,7 @@ jobs:
         if: success()
         uses: ./.github/actions/slack-notify
         with:
-          mention: "<@ULM3EMMKM>"
-          message: "Stg deploy success"
+          message: "@Nakanishi Yosuke 中西 陽介"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
 
       # 失敗時の通知
@@ -48,6 +47,5 @@ jobs:
         if: failure()
         uses: ./.github/actions/slack-notify
         with:
-          mention: "<@ULM3EMMKM>"
-          message: "Stg deploy failed"
+          message: "<@ULM3EMMKM> Stg deploy failed"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}

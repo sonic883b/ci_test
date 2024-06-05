@@ -5,15 +5,11 @@ inputs:
     description: 'Notification message'
     required: true
     type: string
-  slack_webhook_url:
-    description: 'Slack Webhook URL'
-    required: true
-    type: string
 runs:
   using: 'composite'
   steps:
     - name: Send Slack notification
-      uses: slackapi/slack-github-action@v1.26.0
+      uses: slackapi/slack-github-action@v1.16.0
       with:
         payload: |
           {
@@ -25,4 +21,4 @@ runs:
             "status": "${{ job.status }}"
           }
       env:
-        SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
