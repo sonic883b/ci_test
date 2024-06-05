@@ -16,12 +16,12 @@ runs:
       uses: slackapi/slack-github-action@v1.26.0
       with:
         payload: "{\"text\":\" <@U24MN0951>\\n \\n 
-          message   : ${{ inputs.message }}\\n 
-          author    : ${{ github.event.sender.login }}\\n
-          repo_name : ${{ github.event.repository.full_name }}\\n
-          url       : ${{ github.event.pull_request.html_url || github.event.head_commit.url }}\\n
-          branch    : ${{ github.ref }}\\n
-          status    : ${{ job.status }}
+          message: ${{ inputs.message }}\\n 
+          author: ${{ github.event.sender.login }}\\n
+          repo_name: ${{ github.event.repository.full_name }}\\n
+          url: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}\\n
+          branch: ${{ github.ref }}\\n
+          status: ${{ job.status }}
           \"}" 
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
