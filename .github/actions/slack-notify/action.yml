@@ -17,7 +17,6 @@ runs:
       with:
         payload: |
           {
-            "mention": "${{ inputs.mention }}",
             "message": "${{ inputs.message }}",
             "author": "${{ github.event.sender.login }}",
             "repo_name": "${{ github.event.repository.full_name }}",
