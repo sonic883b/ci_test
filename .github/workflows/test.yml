@@ -39,6 +39,7 @@ jobs:
         if: success()
         uses: ./.github/actions/slack-notify
         with:
+          mention: "<@U24MN0951>"
           message: "Stg deploy success"
           slack_webhook_url: ${{ secrets.SLACK_WORKFLOW_WEBHOOK_URL }}
 
