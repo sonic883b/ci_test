@@ -15,7 +15,7 @@ runs:
     - name: Send Slack notification
       uses: slackapi/slack-github-action@v1.26.0
       with:
-        payload: "{\"text\":\" <@U24MN0951> incoming webhook の通知テストです\\n \\n 
+        payload: "{\"text\":\" <@U24MN0951> \\n incoming webhook の通知テストです\\n \\n 
           message: ${{ inputs.message }}\\n 
           author: ${{ github.event.sender.login }}\\n
           repo_name: ${{ github.event.repository.full_name }}\\n
