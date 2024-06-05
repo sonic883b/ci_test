@@ -3,7 +3,7 @@ name: notify-slack color test
 on:
   push:
     branches:
-      - color_test
+      - color_tes
 
 jobs:
   deploy:
